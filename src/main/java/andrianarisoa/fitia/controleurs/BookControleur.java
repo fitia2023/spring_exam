@@ -5,6 +5,7 @@ import andrianarisoa.fitia.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -44,5 +45,10 @@ public class BookControleur {
     @GetMapping("search/title/{title}")
     public List<BookDto> getBooksByTitle(@PathVariable("title") String title) {
         return bookService.getBooksByTitle(title);
+    }
+
+    @GetMapping("search/bookafterdate/{date}")
+    public List<BookDto> getBooksByPublishedDateAfter(@PathVariable("date") String date) throws ParseException {
+        return bookService.getBooksByPublishedDateAfter(date);
     }
 }

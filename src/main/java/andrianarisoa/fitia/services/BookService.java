@@ -6,7 +6,10 @@ import andrianarisoa.fitia.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -68,5 +71,14 @@ public class BookService {
     public List<BookDto> getBooksByTitle(String title) {
         return bookRepository.findByTitle(title).stream().map(book->toBookDto(book)).toList() ;
     }
+
+    public List<BookDto> getBooksByPublishedDateAfter(String published) throws ParseException {
+        //        conversion du format date
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date publishedDate = formatter.parse(published);
+        return bookRepository.findBookByPublishedDateAfter(publishedDate).stream()
+                .map(book->toBookDto(book)).toList() ;
+    }
+
 
 }
