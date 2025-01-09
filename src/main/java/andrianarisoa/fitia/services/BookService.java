@@ -64,4 +64,9 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
+    /**  --Methodes pour query-- **/
+    public List<BookDto> getBooksByTitle(String title) {
+        return bookRepository.findByTitle(title).stream().map(book->toBookDto(book)).toList() ;
+    }
+
 }

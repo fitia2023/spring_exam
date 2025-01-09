@@ -14,6 +14,7 @@ public class BookControleur {
     @Autowired
     private BookService bookService;
 
+    /**  --Methodes pour CRUD-- **/
     @GetMapping("all")
     public List<BookDto> getBooks() {
         return bookService.getAllBooks();
@@ -39,4 +40,9 @@ public class BookControleur {
         bookService.deleteBookById(id);
     }
 
+    /**  --Methodes pour query-- **/
+    @GetMapping("search/title/{title}")
+    public List<BookDto> getBooksByTitle(@PathVariable("title") String title) {
+        return bookService.getBooksByTitle(title);
+    }
 }
